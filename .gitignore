@@ -1,2 +1,8 @@
 /resources
 /myenv
+/frontend/public/images
+/frontend/public/robots.txt
+/backend/base/__pycache__
+/backend/backend/__pycache__
+/backend/base/migrations/__pycache__
+/backend/backend/settings.py
