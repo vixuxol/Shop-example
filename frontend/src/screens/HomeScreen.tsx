@@ -3,15 +3,15 @@ import { Row, Col } from 'react-bootstrap';
 import { Product } from '../components/Product';
 import { Loader } from '../components/Loader';
 import { Message } from '../components/Message';
-import { listProducts } from '../actions/productActions';
+import { listProducts } from '../actions/productListActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { IProductState } from '../reducers/productReducers';
+import { IProductListState } from '../constans/productListConstans';
 
 
 export function HomeScreen() {
     const dispatch = useDispatch();
-    const productList = useSelector<RootState, IProductState>(state => state.productList);
+    const productList = useSelector<RootState, IProductListState>(state => state.productList);
     const {error, loading, products} = productList;
     React.useEffect(() => {
         dispatch<any>(listProducts())

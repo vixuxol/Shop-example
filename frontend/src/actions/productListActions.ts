@@ -1,7 +1,7 @@
-import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL } from '../constans/productConstans';
+import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAIL } from '../constans/productListConstans';
 import { ActionCreator, Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { IProduct } from '../reducers/productReducers';
+import { IProduct } from '../constans/productDetailsConstant';
 import { RootState } from '../store';
 import axios from 'axios';
 
