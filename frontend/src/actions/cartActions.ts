@@ -22,20 +22,27 @@ const cartAddItem: ActionCreator<cartAddItemAction> = (payload: ICartItem) => ({
 //фабрика для CART_REMOVE_ITEM
 export interface cartRemoveItemAction {
     type: typeof CART_REMOVE_ITEM;
-    payload: ICartItem;
+    payload: string;
 }
 
-const cartRemoveItem: ActionCreator<cartRemoveItemAction> = (payload: ICartItem) => ({
+const cartRemoveItem: ActionCreator<cartRemoveItemAction> = (payload: string) => ({
         type: CART_REMOVE_ITEM,
         payload
     }
 )
 
 
-export const addToCart = (id: string, qty: number): ThunkAction<void, RootState, unknown, Action<string>> => async (dispatch, getState) => {
+export const addToCart = (id: string, qty: Number): ThunkAction<void, RootState, unknown, Action<string>> => async (dispatch, getState) => {
     const { data } = await axios.get(`/api/products/${id}`)
 
     dispatch(cartAddItem({product: data, qty: qty})) 
 
+    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+    console.log('вызвана функция')
+}
+
+export const removeFromCart = (id:string): ThunkAction<void, RootState, unknown, Action<string>> => async (dispatch, getState) => {
+    
+    dispatch(cartRemoveItem(id)); 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }

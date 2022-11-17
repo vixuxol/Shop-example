@@ -1,4 +1,4 @@
-import { Reducer } from 'react';
+import { Reducer } from 'redux';
 
 import {    IProductListState,
             PRODUCT_LIST_REQUEST, 
