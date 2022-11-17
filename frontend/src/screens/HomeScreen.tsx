@@ -13,8 +13,10 @@ export function HomeScreen() {
     const dispatch = useDispatch();
     const productList = useSelector<RootState, IProductListState>(state => state.productList);
     const {error, loading, products} = productList;
+    
     React.useEffect(() => {
-        dispatch<any>(listProducts())
+        //@ts-ignore
+        dispatch(listProducts())
     }, [dispatch]);
 
     /* Sm - тип маленький экран */
