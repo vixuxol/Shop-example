@@ -7,11 +7,14 @@ from rest_framework.response import Response
 
 from .models import Product
 from django.contrib.auth.models import User
-from .serializers import ProductSerializer, UserSerializer
+from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
 
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import MyTokenObtainPairSerializer
+
+from django.contrib.auth.hashers import make_password
+from rest_framework import status
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -34,6 +37,10 @@ def getRoutes(request):
 
         '/api/products/delete/<id>/',
         '/api/products/<update>/<id>/',
+
+        '/api/users/login/',
+        '/api/users/profile/',
+        
     ]
     return Response(routes)
 
@@ -65,3 +72,21 @@ def getUsers(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many = True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def registerUser(request):
+    data = request.data
+
+    try:
+        user = User.objects.create(
+            first_name = data['name'],
+            username = data['username'],
+            email = data['email'],
+            password = make_password(data['password']),
+        )
+        serializer = UserSerializerWithToken(user, many=False)
+        return Response(serializer.data)
+    except:
+        message = {'detail': "User with this username already exist"}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
