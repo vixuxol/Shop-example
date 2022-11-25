@@ -58,7 +58,7 @@ const userLogout: ActionCreator<userLogoutAction> = () => ({
 )
 
 
-export const removeFromCart = (email: string, username: string, password: string): ThunkAction<void, RootState, unknown, Action<string>> => async (dispatch, getState) => {
+export const login = (email: string, username: string, password: string): ThunkAction<void, RootState, unknown, Action<string>> => async (dispatch, getState) => {
     
     try {
         dispatch(userLoginRequest());
