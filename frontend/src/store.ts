@@ -7,12 +7,15 @@ import { IProductListState } from './constans/productListConstans';
 import { productDetailsReducer } from './reducers/productsDetailsReducer';
 import { cartReducer } from './reducers/cartReducers';
 import { ICartState, ICartItem } from './constans/cartConstans';
+import { userLoginReducer } from './reducers/userReducer';
+import { IUserState } from './constans/userConstans';
 
 
 export interface RootState {
     productList: IProductListState;
     productDetails: IProductDetailsState;
     cart: ICartState, 
+    userLogin: IUserState,
 }
 
 
@@ -20,16 +23,25 @@ const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
     cart: cartReducer,
+    userLogin: userLoginReducer,
 });
 
 //@ts-ignore
 const cartItemsFromStorage: Array<ICartItem> = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
+
+//@ts-ignore
+const userInfoFromStorage: object = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : {};
 
 const initialState = {
     productList: undefined,
     productDetails: undefined,
     cart: {
         cartItems: cartItemsFromStorage,
+    },
+    userLogin: {
+        loading: false,
+        error: '',
+        userInfo: userInfoFromStorage
     }
 };
 

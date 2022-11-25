@@ -46,6 +46,8 @@ export const listProducts = (): ThunkAction<void, RootState, unknown, Action<str
         const { data } = await axios.get('/api/products/');
         dispatch(productListSuccess(data));
     } catch (error) {
-        dispatch(productListFail(String(error)))
+        //@ts-ignore
+        const payload = error.response && error.response.data.detail ? error.response.data.detail : error.message;
+        dispatch(productListFail(payload))
     }
 }
