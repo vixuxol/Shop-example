@@ -30,7 +30,7 @@ const reducer = combineReducers({
 const cartItemsFromStorage: Array<ICartItem> = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
 
 //@ts-ignore
-const userInfoFromStorage: object = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : {};
+const userInfoFromStorage: object = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null;
 
 const initialState = {
     productList: undefined,

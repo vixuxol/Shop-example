@@ -58,13 +58,13 @@ const userLogout: ActionCreator<userLogoutAction> = () => ({
 )
 
 
-export const login = (email: string, username: string, password: string): ThunkAction<void, RootState, unknown, Action<string>> => async (dispatch, getState) => {
+export const login = (username: string, password: string): ThunkAction<void, RootState, unknown, Action<string>> => async (dispatch, getState) => {
     
     try {
         dispatch(userLoginRequest());
         const config = {
             headers: {
-                'Content-type':'application/json'
+                'Content-Type': 'application/json',
             }
         }
         const { data } = await axios.post(
@@ -77,7 +77,7 @@ export const login = (email: string, username: string, password: string): ThunkA
 
     } catch(error) {
         //@ts-ignore
-        const error = error.response && error.response.data.detail ? error.response.data.detail : error.message;
-        dispatch(userLoginFail(error))
+        const payload = error.response && error.response.data.detail ? error.response.data.detail : error.message;
+        dispatch(userLoginFail(payload))
     }
 }
